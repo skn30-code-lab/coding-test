@@ -36,12 +36,12 @@
 ### 2. 파일명 규칙
 
 ```
-solution_이름.py
-solution_이름.ipynb
+이름_문제이름.py
+이름_문제이름.ipynb
 ```
 
 예시:
-`solution_jexists.py`
+`jexists_설탕배달.py`
 
 
 ---
