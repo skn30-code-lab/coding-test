@@ -1,17 +1,16 @@
 def solution(schedules, timelogs, startday):
-    remove_day = {1:(6, 5), 2:(5, 4), 3:(4, 3), 4:(3, 2), 5:(2, 1), 6:(1, 0), 7: (6, 0)}
+    weekend = {(6-startday)%7, (7-startday)%7}
     answer = len(schedules)
     
-    for time in timelogs:
-        for day in remove_day[startday]:
-            time.pop(day)
     for schedule, logs in zip(schedules, timelogs):
-        schedule = (schedule // 100)*60 + schedule % 100
-        for log in logs:
-            log = (log // 100)*60 + log % 100
-            if log > schedule + 10:
-                print(log, schedule)
-                answer -= 1
-                break;
-    return answer
+        deadline = (schedule // 100)*60 + schedule % 100 + 10
 
+        for idx, log in enumerate(logs):
+            if idx in weekend:
+                continue
+            
+            log = (log // 100)*60 + log % 100
+            if log > deadline:
+                answer -= 1
+                break
+    return answer
