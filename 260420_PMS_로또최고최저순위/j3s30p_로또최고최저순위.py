@@ -1,13 +1,10 @@
 def solution(lottos, win_nums):
-    rate = 6
-    flag = False
+    rank = [6, 6, 5, 4, 3, 2, 1]
     zero = 0
+    match = 0
     for num in lottos:
         if num == 0:
             zero += 1
-        if num in win_nums:
-            if flag:
-                rate -= 1
-            flag = True
-
-    return [1 if zero == 6 else rate - zero, rate]
+        elif num in win_nums:
+            match += 1
+    return [rank[match + zero], rank[match]]
