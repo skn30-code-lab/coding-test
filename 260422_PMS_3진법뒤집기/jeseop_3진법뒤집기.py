@@ -6,6 +6,6 @@ def change(num):
     return str(char) + change(num)
 
 def solution(n):
-    answer = ''
-    answer += change(n)
-    return int(answer, 3)
+    return int(change(n), 3)
+
+print(solution(45))
