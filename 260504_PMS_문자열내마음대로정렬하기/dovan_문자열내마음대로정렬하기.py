@@ -14,3 +14,7 @@ def solution(strings, n):
 //     sorted_key = sorted(keys)
 //     result = [i[1] for i in sorted_key]
 //     return result
+
+# 유효 기간 알 수 없음
+# 람다 적용 예상 테스트 10문제
+# https://gemini.google.com/share/c6769a266b2b
