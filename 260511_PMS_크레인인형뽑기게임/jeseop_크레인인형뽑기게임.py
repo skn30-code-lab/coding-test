@@ -5,7 +5,7 @@ def solution(board, moves):
         for i in range(len(board)):
             doll = board[i][move-1]
             if doll:
-                if result and result[len(result)-1] == doll:
+                if result and result[-1] == doll:
                     result.pop()
                     pop += 2
                 else:
