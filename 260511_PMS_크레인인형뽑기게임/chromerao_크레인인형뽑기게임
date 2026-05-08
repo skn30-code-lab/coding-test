@@ -1,0 +1,18 @@
+def solution(board, moves):
+    answer = 0                  # 터트린 값 count
+    stack = []                  # 뽑은 인형 담는 stack
+    
+    for i in moves:
+        for item in board:
+            if item[i-1] != 0:
+                if stack and stack[-1] == item[i-1]:
+                    stack.pop()
+                    item[i-1] = 0
+                    answer += 2
+                    break
+                else:
+                    stack.append(item[i-1])
+                    item[i-1] = 0
+                    break
+                    
+    return answer
