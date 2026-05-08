@@ -21,11 +21,11 @@ def bin_gcd(a, b):
     '''
     나눗셈 계산보다 빠른 비트연산 기반
     '''
-    shift = 1
+    shift = 0
     while not (a&1 or b&1):
         a >>= 1
         b >>= 1
-        shift <<= 1
+        shift += 1
     while not a&1:
         a >>= 1
     
@@ -35,7 +35,7 @@ def bin_gcd(a, b):
         if a > b:
             a, b = b, a
         b -= a
-    return shift * a
+    return a << shift
 
 def solution(numer1, denom1, numer2, denom2):
     numer = (numer1 * denom2) + (numer2 * denom1)
