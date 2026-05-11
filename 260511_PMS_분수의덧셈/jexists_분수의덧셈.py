@@ -2,6 +2,9 @@ import math
 def solution(numer1, denom1, numer2, denom2):
   # 공통 분모 계산 (최소공배수)
   common_denom = denom1 * denom2 // math.gcd(denom1, denom2)
+  # 최대공약수(Greatest Common Divisor) 를 구하는 함수 = math.gcd()
+  # common_denom = math.lcm(denom1, denom2)
+
 
   # 분자 통분 및 합산
   fnumer1 = numer1 * (common_denom // denom1)
