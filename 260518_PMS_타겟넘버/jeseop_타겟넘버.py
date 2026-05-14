@@ -18,12 +18,7 @@ def solution(numbers, target):
             next_level.append(node.right)
         current_level = next_level
         
-    count = 0
-    for node in current_level:
-        if node.value == target:
-            count += 1
-
-    return count
+    return sum(1 for node in current_level if node.value == target)
 
 
 numbers1 = [1, 1, 1, 1, 1]
