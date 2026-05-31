@@ -19,6 +19,8 @@ def solution(numbers, target):
 # full depth 보다 작을 때까지 while문 돌아가도록 함
 # 종료 조건은 원하는 depth의 index에 도달하는 경우
 # 종료시 해당 계층 모든 합의 리스트를 리턴
+# 현재 방식은 DFS 보다 BFS 에 가깝다고 함
+# 그리고 계층이 정해져 있기에 굳이 while 문을 사용하지 않아도 된다고 함
     while loc_index < full_depth:
         sum_list = []
         target_num = numbers[loc_index]
