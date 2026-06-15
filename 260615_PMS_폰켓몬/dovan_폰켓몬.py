@@ -24,7 +24,7 @@ def solution(nums):
 # # 3. 추출된 각 원소별로 N개를 뽑는 경우의 수 계산
 # N = len(nums)//2
 # for element in most_common_elements:
-#     ways_to_pick = math.comb(max_frequency, N)
+#     ways_to_pick = math.comb(set(nums), N)
 #     print(f'{ways_to_pick}')
 
 # 시도 3(오답)
