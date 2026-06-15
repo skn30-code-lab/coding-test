@@ -1,0 +1,71 @@
+import bisect
+
+def solution(arr, l, r):
+    # 1. 길이와 값의 누적합 배열 생성 (1-based index)
+    len_prefix = [0]
+    sum_prefix = [0]
+    
+    for num in arr:
+        len_prefix.append(len_prefix[-1] + num)
+        sum_prefix.append(sum_prefix[-1] + num * num)
+
+    # 2. 특정 위치(x)까지의 누적 총합을 구하는 함수 O(log N)
+    def sum_up_to(x):
+        if x == 0: return 0
+        idx = bisect.bisect_left(len_prefix, x)
+        full_blocks = idx - 1
+        res = sum_prefix[full_blocks]
+        res += (x - len_prefix[full_blocks]) * arr[full_blocks]
+        return res
+
+    # 3. K 연산: [l, r] 구간의 합
+    K = sum_up_to(r) - sum_up_to(l - 1)
+    
+    # 4. C 연산: O(N) 슬라이딩 윈도우 점프
+    C = 0
+    L = r - l + 1
+    
+    start = 1
+    end = L
+    total_len = len_prefix[-1]
+    
+    curr_K = sum_up_to(L)
+    
+    left_b = 0
+    right_b = 0
+    
+    while end <= total_len:
+        # 마지막 끝자리에 도달했을 때의 예외 처리 후 종료
+        if end == total_len:
+            if curr_K == K:
+                C += 1
+            break
+            
+        # 현재 start와 다음 칸에 추가될 end + 1이 속한 블록 인덱스 정확히 갱신
+        while start > len_prefix[left_b + 1]: left_b += 1
+        while (end + 1) > len_prefix[right_b + 1]: right_b += 1
+            
+        # 블록 경계를 넘지 않고 안전하게 이동할 수 있는 최대 칸 수 (jump) 계산
+        limit_left = len_prefix[left_b + 1] - start + 1
+        limit_right = len_prefix[right_b + 1] - (end + 1) + 1
+        jump = min(limit_left, limit_right)
+        
+        # 1칸 이동할 때의 합 변화량 (새로 들어올 값 - 나갈 값)
+        delta = arr[right_b] - arr[left_b]
+        
+        if delta == 0:
+            if curr_K == K:
+                C += jump
+        else:
+            diff = K - curr_K
+            if diff % delta == 0:
+                step = diff // delta
+                if 0 <= step < jump:
+                    C += 1
+                    
+        # 윈도우 점프 및 상태 업데이트
+        curr_K += jump * delta
+        start += jump
+        end += jump
+        
+    return [K, C]
